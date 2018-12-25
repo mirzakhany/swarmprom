@@ -5,32 +5,10 @@ global:
   external_labels:
     monitor: 'promswarm'
 
-rule_files:
-  - "swarm_node.rules.yml"
-  - "swarm_task.rules.yml"
-
-alerting:
-  alertmanagers:
-  - static_configs:
-    - targets:
-      - alertmanager:9093
-
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
-
-  - job_name: 'prometheus_dev'
-    static_configs:
-      - targets: ['localhost:9090']
-
-  - job_name: 'prometheus_staging'
-    static_configs:
-      - targets: ['localhost:9090']  
-
-  - job_name: 'prometheus_production'
-    static_configs:
-      - targets: ['localhost:9090']  
 
   - job_name: 'dockerd-exporter'
     dns_sd_configs:

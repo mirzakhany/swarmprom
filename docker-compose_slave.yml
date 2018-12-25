@@ -81,14 +81,15 @@ services:
           memory: 64M
 
   prometheus:
-    image: stefanprodan/swarmprom-prometheus:v2.5.0
+    image: mirzakhani/swarmprom-prometheus:v2.5.0
     networks:
       - net
     command:
-      - '--config.file=/etc/prometheus/prometheus_slave.yml'
+      - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention=24h'
     volumes:
+      - ./prometheus_slave/conf:/etc/prometheus
       - prometheus:/prometheus
     configs:
       - source: node_rules
